@@ -38,10 +38,7 @@ defmodule Kaffy.ResourceQuery do
     default_order_field = Map.get(params, "_of", "nil") |> String.to_existing_atom()
     default_order_way = Map.get(params, "_ow", "nil") |> String.to_existing_atom()
 
-    case is_nil(default_order_field) or is_nil(default_order_way) do
-      true -> default_ordering
-      false -> [{default_order_way, default_order_field}]
-    end
+    default_ordering || [{default_order_way, default_order_field}]
   end
 
   def fetch_resource(conn, resource, id) do
